@@ -1,0 +1,15 @@
+{
+  "name": "bloggify",
+  "version": "1.0.0",
+  "description": "Blog application built with the MERN Stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Chandan Gupta",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
