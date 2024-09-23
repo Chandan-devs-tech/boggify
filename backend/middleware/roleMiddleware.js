@@ -1,6 +1,7 @@
 const authenticateRole = (requiredRole) => {
   return (req, res, next) => {
-    if (req.user && req.user.roleId === requiredRole) {
+    // Check for role instead of roleId
+    if (req.user && req.user.role === requiredRole) {
       next();
     } else {
       res.status(403).send("Forbidden");
