@@ -15,6 +15,14 @@ const loginSchema = Joi.object({
   password: Joi.string().required().min(8).max(128),
 });
 
+// Generate Token function
+const generateTokenReg = (id) => {
+  const token = jwt.sign({ userId: id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+  return token;
+};
+
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
   const { error } = registerSchema.validate(req.body);
@@ -35,7 +43,8 @@ const registerUser = asyncHandler(async (req, res) => {
   // Add roleId to the user object
   const user = await User.create({ name, email, password, roleId: "user" });
 
-  generateToken(res, user._id);
+  const token = generateTokenReg(user._id);
+  res.status(201).json({ _id: user._id, token });
 });
 
 // Login User
